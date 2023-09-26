@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+
+
+    <div class="hero-wrap hero-bread" style="background-image: url('{% static 'images/bg_1.jpg' %}');">
+        <div class="container">
+          <div class="row no-gutters slider-text align-items-center justify-content-center">
+            <div class="col-md-9 ftco-animate text-center">
+                <p class="breadcrumbs"><span style="color:brown; font-size: 15px;"><a href="/home/">Home</a></span> <span style="color: rgb(13, 12, 26); font-size: 15px;">Contact us</span></p>
+              <h1 class="mb-0 bread">Contact us</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <section class="ftco-section contact-section bg-light">
+        <div class="container">
+            <div class="row d-flex mb-5 contact-info">
+            <div class="w-100"></div>
+            <div class="col-md-3 d-flex">
+                <div class="info bg-white p-4">
+                  <p><span>Address:</span> 	808 Arjun Skyline , California , USA</p>
+                </div>
+            </div>
+            <div class="col-md-3 d-flex">
+                <div class="info bg-white p-4">
+                  <p><span>Phone:</span> <a href="tel://">+91 7600591675</a></p>
+                </div>
+            </div>
+            <div class="col-md-3 d-flex">
+                <div class="info bg-white p-4">
+                  <p><span>Email:</span> <a href="mailto:info@yoursite.com">info@yoursite.com</a></p>
+                </div>
+            </div>
+            <div class="col-md-3 d-flex">
+                <div class="info bg-white p-4">
+                  <p><span>Website</span> <a href="#">yoursite.com</a></p>
+                </div>
+            </div>
+          </div>
+
+          <div>
+            {% for message in messages %}
+            <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+
+        
+          <div class="row block-9">
+            <div class="col-md-5 order-md-last">
+              <form method='POST' novalidate>
+                {% csrf_token %}
+                <div class="form-row">
+
+                    {% for fm in form %}
+                    <div class="col-6">
+                        <br>
+                        <label >{{fm.label_tag}}</label>
+                        {{fm}}
+
+                    </div>
+                    {% endfor %}
+                    <div class=" col-4 mt-3">
+                        <button type="submit" class="btn btn-block btn-primary"><i class="fas fa-plus-circle"></i>
+                          submit</button>
+                    </div>
+                </div>
+            </form>
+
+            </div>
+  
+            <div class="col-md-6 d-flex">
+                <div id="map" class="bg-white">
+                  <iframe src="https://www.google.com/maps/embed/v1/place?key=maps?hl=en&tab=rl" frameborder="0"></iframe>
+                </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <hr>
+
+                
+                {% comment %} {% for add in contacts %}
+                    
+                
+                    
+                <div class="col-sm-12 p-2 ">
+                    <div class="card">
+                        <div class="card-header">
+                            Address - {{forloop.counter}}
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">{{add.name}} {{add.lname}} <br>{{add.email}} <br>{{add.subject}} <br> {{add.message}}   <br>{{add.city}} <br>{{add.pincode}}<br>{{add.state}} <br>{{add.counrty}}</h5>
+                            <p class="card-text">With supporting text below as a natural lead-in to additional content.
+                            </p>
+                            <a href="/updateaddress/{{add.id}}/" class="btn btn-success"><i class="fa fa-edit"></i></a>
+                            <a href="/deleteaddress/{{add.id}}/" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                {% endfor %}
+            </div>
+        </div> {% endcomment %}
+
+      {% endblock body %}

@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Allproducts
+{% endblock title %}
+    
+{% block body %}
+
+{% if not all_products %}
+<h2>Product not found</h2>
+{% endif %}
+
+
+<div class="container-fluid p-3">
+<div class="row">
+    <div class="col-sm-3">
+        <div class="list-group">
+            <a href="/allproducts/" class="list-group-item list-group-item-action bg-secondary text-light">
+                <strong>All Products</strong>
+            </a>
+            {% for cats in all_categories %}
+                
+                <form action="">
+                    <input type="text" hidden name="catesid" value="{{cats.id}}" id="">
+                    <button type="submit" class="list-group-item list-group-item-action">{{cats.name}}</button>
+                </form>
+                {% endfor %}
+        </div>
+    </div>
+    <div class="col-lg-9 col-sm-9">
+        <div class="row ">
+            <div class="col-sm-12 bg-secondary p-2" style="border-radius: 4px;">
+                <form action="">
+                    <div class="row">
+                        <div class="col-lg-4 col-sm-12 mt-3">
+                            <div class="form-group">
+                                <select class="form-control" name="catename">
+                                    
+                                    {% for cats in all_categories  %}
+                                        <option>{{cats}}</option>
+                                    {% endfor %}
+                                        
+                                </select>
+                            </div>
+                        </div>
+                           <div class="col-lg-2 col-sm-12 mt-3">
+                            <div class="form-group">
+                               <input class="form-control" placeholder="From Price" type="number" name="startprice" id="">
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-sm-12 mt-3">
+                            <div class="form-group">
+                               <input class="form-control" type="number" placeholder="To Price" name="endprice" id="">
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-12 mt-3">
+                                <div class="form-group">
+                                <input type="text" name="byname" placeholder="Product name" class="form-control" id="exampleInputPassword1">
+                            </div>
+                        </div>
+                        <div class="col-lg-1 col-sm-12 mt-3">
+                            <div class="form-group" >
+                                <button class="btn btn-warning" type="submit">search<i class="glyphicon glyphicon-search"></i></button>
+                            </div>  
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            {% for prod in all_products %}
+            <div class="col-lg-5 col-sm-12  p-2 ">
+                <div class="card" >
+                    <a href="/proinfo/{{prod.id}}">
+                    <img style="height: 300px;" src="{{prod.image.url}}" class="card-img-top p-3 border" alt="...">
+                </a>
+                    <div class="card-body ">
+                        <h5 class="card-title">{{prod.name}} </h5>
+                        <p class="card-text text-center">
+                            <div class="row">
+                                <h5 class="ml-2"><strong>₹{{prod.sell_price}}</strong></h5>
+                                <h6 class="ml-2 mb-1"><s>₹{{prod.og_price}}</s></h6>
+                                <small class="text-success ml-2 mt-1"> ₹{{prod.discount}}</small>
+                            </div>
+                            
+                        </p>
+                        {% if request.user.is_authenticated %}
+                        
+                        <a href="/addtocart/{{prod.id}}/" class="btn btn-block btn-warning"><h5><i class="fas fa-cart-plus"></i> Add to cart</h5></a>
+                        {% endif %}
+                    </div>
+               
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+</div>
+<br>
+<br>
+    
+
+{% endblock body %}
+    
