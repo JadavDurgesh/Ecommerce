@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Cart  
+{% endblock title %}
+
+
+{% block body %}
+      
+            <div class="container-fluid p-3">
+
+              <div class="row">
+                <div class="col-sm-12 m-0 p-0">
+                  <h2 class="display-4 p-1 border text-center text-light bg-secondary">CART</h2>
+                </div>
+              </div>
+      </div>
+      <div class="row">
+          <div class="col-sm-12 table-responsive ">
+            <table class="table   ">
+              <thead>
+                <tr>
+                  <th scope="col">Delete</th>
+                  <th scope="col">Image</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">Quantity</th>
+                  <th scope="col">Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <div>
+                  {% for message in messages %}
+                  <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                      </button>
+                      {{ message }}
+                  </div>
+                  {% endfor %}
+              </div>
+      
+                {% for i in cart_items %}
+                <tr>
+                  <td><a class="btn" href="/deletecart/{{i.id}}">
+                  <h4> <i class="fas fa-trash text-danger">❌ </i> </h4> </a> </td>
+                    
+                  <th><img style="height: 80px;" src="{{i.product.image.url}}" alt=""></th>
+                  <td>{{i.product.name}}</td>
+                  <td>{{i.product.sell_price}}</td>
+                  <td>
+                    <a class="text-dark mr-2" href="/minuscart/{{i.id}}"><i class="fas fa-minus-circle">➖</i></a>
+                    {{i.quantity}}
+                    <a class="text-dark ml-2" href="/pluscart/{{i.id}}/"><i class="fas fa-plus-circle">➕</i></a>
+      
+                  </td>
+                  <td>{{i.prod_total}}</td>
+                  {% empty %}
+                
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+  
+    </div>
+
+
+
+<br>
+
+    <div class="row">
+      <div class="col-sm-12 p-2   text-center">
+        <a href="/clearcart/" class="btn btn-lg btn-danger ml-2" type="submit"> Clear Cart</a>
+      </div>
+    </div>
+
+<br>
+<div class="row">
+  <div class="col-sm-12 p-2   text-center">
+    <a href="/allproducts/" class="btn btn-lg btn-warning ml-2" type="submit"> Add Item </a>
+  </div>
+
+<br>
+  
+    <div class="col " style="margin-left: 42rem;" >
+      <table class = "center">
+        <tbody>
+          <tr>
+            <td><strong class="">Total Amount:</strong>
+            <td class="text-right">{{sub_total}}</td>
+            </td>
+          </tr>
+          <tr>
+            <td><strong class="">Shipping Amount:</strong>
+            <td class="text-right">{{ship_charge}}</td>
+            </td>
+          </tr>
+          <tr>
+            <td><strong class="">GST </strong>
+            <td class="text-right">{{GST}}</td>
+            </td>
+          </tr> 
+          <tr>
+            <td><strong class="">Payable Amount:</strong>
+            <td class="text-right"><strong>{{grand_total}}</strong></td>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <hr>
+    </div>
+  </div>
+
+  
+  <div class="col mt-3">
+    <a href="/checkout/" class="btn btn-block btn-info" type="submit"> Place order </a>
+  </div>
+
+
+  
+
+<br>
+<br>
+<br>
+    
+  {% endblock body %}
