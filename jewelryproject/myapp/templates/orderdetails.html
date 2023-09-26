@@ -1,0 +1,339 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Order Details |
+ 
+
+{% endblock title %}
+
+
+{% block body %}
+ 
+
+<div class="shop-main-wrapper section-padding pb-0">
+    <div class="container"  >
+        <div class="row">
+            <!-- product details wrapper start -->
+            <div class="col-lg-12 order-1 order-lg-2">
+                <!-- product details inner end -->
+                <div class="product-details-inner">
+                    <div class="row">
+                        
+                        <div class="col-lg-5">
+                            <div class="product-large-slider">
+                                <div class="pro-large-img img-zoom">
+                                    <img src="{{one_product.product.photo.url}}" alt="product-details" />
+                                </div>
+                                <div class="pro-large-img img-zoom">
+                                    <img src="{{one_product.product.photo.url}}" alt="product-details" />
+                                </div>
+                                <div class="pro-large-img img-zoom">
+                                    <img src="{{one_product.product.photo.url}}" alt="product-details" />
+                                </div>
+                                <div class="pro-large-img img-zoom">
+                                    <img src="{{one_product.product.photo.url}}" alt="product-details" />
+                                </div>
+                                <div class="pro-large-img img-zoom">
+                                    <img src="{{one_product.product.photo.url}}" alt="product-details" />
+                                </div>
+                            </div>
+                            <div class="pro-nav slick-row-10 slick-arrow-style">
+                                
+                            </div>
+                        </div>
+                        <div class="col-lg-7 border border dark" style="background-color: #f1eff0;">
+                            <div class="product-details-des">
+                                <h3 class="product-name">{{one_product.product.name}}</h3>
+                                <div>
+                                    <span>Wearing Occasion: <strong
+                                            class="text-muted">{{one_product.product.p_occasion}}</strong></span>
+                                </div>
+                                <div>
+                                    <span>For: <strong
+                                            class="text-muted">{{one_product.product.main_cate}}</strong></span>
+                                </div>
+                                <div>
+                                    <span>Material: <strong
+                                            class="text-muted">{{one_product.product.p_material}}</strong></span>
+                                    <ul class="color-categories">
+
+                                        {% if pro.p_material == 'Diamond' %}
+                                        <li>
+                                            <a class="c-lightblue" href="#" data-toggle="tooltip"
+                                                data-placement="top" title="Diamond"></a>
+                                        </li>
+                                        {% elif pro.p_material == 'Gold' %}
+                                        <li>
+                                            <a class="c-darktan" href="#" data-toggle="tooltip"
+                                                data-placement="top" title="Gold"></a>
+                                        </li>
+                                        {% elif pro.p_material == 'Silver' %}
+                                        <li>
+                                            <a class="c-grey" href="#" data-toggle="tooltip"
+                                                data-placement="top" title="Silver"></a>
+                                        </li>
+                                        {% elif pro.p_material == 'Platinum' %}
+                                        <li>
+                                            <a class="bg-light" href="#" data-toggle="tooltip"
+                                                data-placement="top" title="Platinum"></a>
+                                        </li>
+                                        {% endif %}
+
+                                    </ul>
+                                </div>
+
+                                <!-- <div class="ratings d-flex">
+                                    <span><i class="fa fa-star-o"></i></span>
+                                    <span><i class="fa fa-star-o"></i></span>
+                                    <span><i class="fa fa-star-o"></i></span>
+                                    <span><i class="fa fa-star-o"></i></span>
+                                    <span><i class="fa fa-star-o"></i></span>
+                                    <div class="pro-review">
+                                        <span>1 Reviews</span>
+                                    </div>
+                                </div> -->
+                                <div class="price-box">
+                                    <span class="price-regular">₹ {{one_product.product.sell_price}}</span>
+                                    <span class="price-old"><del>₹ {{one_product.product.og_price}}</del></span>
+                                </div>
+                                <div>
+                                    <span>Discount: <strong
+                                            class="text-danger">{{one_product.product.discount}}%</strong></span>
+                                </div>
+                                <div>
+                                    <span>Off: <strong class="text-danger">₹
+                                            {{one_product.product.discounted_price}}/-</strong></span>
+                                </div>
+                                <!-- <h5 class="offer-text"><strong>Hurry up</strong>! offer ends in:</h5>
+                                <div class="product-countdown" data-countdown="2019/12/25"></div>
+                                <div class="availability">
+                                    <i class="fa fa-check-circle"></i>
+                                    <span>200 in stock</span>
+                                </div> -->
+                                <p class="pro-desc">{{one_product.product.p_des}}</p>
+                                {% comment "" %}<div>
+                                    <span>Size: <strong
+                                            class="text-muted">{{one_product.psize}}</strong></span>
+                                    </div>
+                                    <div>
+                                    <span>Quantity: <strong
+                                            class="text-muted">{{one_product.quantity}}</strong></span>
+                                    </div>{% endcomment %}
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- product details inner end -->
+
+                <!-- product details reviews end -->
+            </div>
+            <!-- product details wrapper end -->
+        </div>
+    </div>
+</div>
+<!-- page main wrapper end -->
+
+
+<main>
+    
+    <!-- breadcrumb area end -->
+
+    <!-- checkout main wrapper start -->
+    <div class="checkout-page-wrapper section-padding">
+        <div class="container" style="background-color: #f1eff0;">
+
+            <div class="row">
+
+                <!-- Order Summary Details -->
+                <div class="col-lg-7 border border dark">
+                    <div class="order-summary-details">
+                        <h5 class="checkout-title">Your Product Summary</h5>
+                        <div class="order-summary-content">
+                            <!-- Order Summary Table -->
+                            <div class="order-summary-table table-responsive text-center">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        
+                                        <tr>
+                                            <td><strong>Products</strong></td>
+                                            <td><strong>{{one_product.product.name}}</strong></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        {% for itm in cart_data %}
+                                        {% comment %} <tr>
+                                            <td>{{itm.product.name}} ({{itm.product.sell_price}} ×
+                                                {{itm.quantity}})</a>
+                                            </td>
+                                            <td>₹ {{itm.product_total}}</td>
+                                        </tr> {% endcomment %}
+                                        {% endfor %}
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td> Brand</td>
+                                            <td><strong>{{one_product.product.p_brand}}</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Quantity</td>
+                                            <td><strong> {{one_product.quantity}}</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Size</td>
+                                            <td>
+                                                <label>{{one_product.psize}}</label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                                                        
+                                        </tr>
+                                    </tfoot>
+
+
+
+                                    <tr>
+                                        {{one_product.status}}
+                                        {% if one_product.status == 'Pending' %}
+                                        <div class="progress">
+                                            <div data-toggle="tooltip" data-placement="top" title="{{one_product.status}}" class="progress-bar progress-bar-striped progress-bar-animated"
+                                                role="progressbar" aria-valuenow="75" aria-valuemin="0"
+                                                aria-valuemax="100" style="width: 20%"></div>
+                                        </div>
+                                        {% elif one_product.status == 'Accepted' %}
+                                        <div class="progress">
+                                            <div data-toggle="tooltip" data-placement="top" title="{{one_product.status}}" class="progress-bar progress-bar-striped progress-bar-animated"
+                                                role="progressbar" aria-valuenow="75" aria-valuemin="0"
+                                                aria-valuemax="100" style="width: 40%"></div>
+                                        </div>
+                                        {% elif one_product.status == 'Packing' %}
+                                        <div class="progress">
+                                            <div data-toggle="tooltip" data-placement="top" title="{{one_product.status}}" class="progress-bar progress-bar-striped progress-bar-animated"
+                                                role="progressbar" aria-valuenow="75" aria-valuemin="0"
+                                                aria-valuemax="100" style="width: 60%"></div>
+                                        </div>
+                                        {% elif one_product.status == 'Shipping' %}
+                                        <div class="progress">
+                                            <div data-toggle="tooltip" data-placement="top" title="{{one_product.status}}" class="progress-bar progress-bar-striped progress-bar-animated"
+                                                role="progressbar" aria-valuenow="75" aria-valuemin="0"
+                                                aria-valuemax="100" style="width: 80%"></div>
+                                        </div>
+                                        {% elif one_product.status == 'Deliverd' %}
+                                        <div class="progress">
+                                            <div data-toggle="tooltip" data-placement="top" title="{{one_product.status}}" class="progress-bar progress-bar-striped progress-bar-animated"
+                                                role="progressbar" aria-valuenow="75" aria-valuemin="0"
+                                                aria-valuemax="100" style="width: 100%"></div>
+                                        </div>
+                                        {% endif %}
+ 
+                                    </tr>
+
+
+
+
+
+
+                                </table>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <!-- Checkout address Details -->
+                <div class="col-lg-5 border border dark"  >
+                    <div class="checkout-billing-details-wrap">
+                        <h5 class="checkout-title">Address Details</h5>
+                        <div class="billing-form-wrap">
+                            <div class="minicart-content-box">
+                                <div class="minicart-item-wrapper">
+                                    <form action="{% url 'placeorder' %}" method="POST">
+                                        {% csrf_token %}
+                                        <ul>
+                                            {% for add in customer_data %}
+
+                                            <li class="minicart-item">
+                                                <div class="minicart-thumb">
+
+                                                    <table>
+                                                        <tbody>
+                                                            <tr>
+                                                                <th class="h5" colspan="2">
+                                                                    <div class="single-payment-method show">
+                                                                        <div class="payment-method-name">
+                                                                            <div class="">
+                                                                                <input type="" id="{{add.id}}"
+                                                                                    name="address_id" value="{{add.id}}"
+                                                                                    class="custom-control-input"
+                                                                                    required>
+                                                                                <label class="custom-control-label"
+                                                                                    for="{{add.id}}">Address:
+                                                                                    {{forloop.counter}}</label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </th>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Name:</th>
+                                                                <td>{{add.name}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Locality:</th>
+                                                                <td>{{add.locality}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>City:</th>
+                                                                <td>{{add.city}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Zip:</th>
+                                                                <td>{{add.zipcode}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>State:</th>
+                                                                <td>{{add.state}}</td>
+                                                            </tr>
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+
+
+                                            </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+
+
+
+
+            </div>
+        </div>
+        
+    </div>
+    
+    <!-- checkout main wrapper end -->
+</main>
+
+
+
+
+
+
+{% endblock body %}
