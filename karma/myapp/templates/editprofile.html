@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block body %}
+{% load static %}
+
+	<!-- Start Banner Area -->
+	<section class="banner-area organic-breadcrumb">
+		<div class="container">
+			<div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+				<div class="col-first">
+					<h1>Your Profile</h1>
+					<nav class="d-flex align-items-center">
+						<a href="index.html">Home<span class="lnr lnr-arrow-right"></span></a>
+						<a href="category.html">Profile</a>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End Banner Area -->
+
+	<!--================Login Box Area =================-->
+	<section class="login_box_area section_gap">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="login_box_img">
+						<img class="img-fluid" src="{% static 'img/login.jpg' %}" alt="">
+						<div class="hover">
+							<h4>New to our website?</h4>
+							<p>There are advances being made in science and technology everyday, and a good example of this is the</p>
+							{% if profile %}
+								<a class="primary-btn" href="{% url 'profile' %}">Update your profile</a>
+							{% else %}
+								<a class="primary-btn" href="{% url 'index' %}">Home</a>
+							{% endif %} 
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="login_form_inner">
+                        {% for msg in messages %}
+                            <h3>{{msg}}</h3>    
+                        {% endfor %}
+
+						<h3>Update your profile</h3>
+						<form class="row login_form" method="POST" id="contactForm" novalidate="novalidate">
+							{% csrf_token %}
+                            {{form.as_table}}       
+                                <button type="submit" value="submit" class="primary-btn">Submit</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--================End Login Box Area =================-->
+
+
+{% endblock body %}
+

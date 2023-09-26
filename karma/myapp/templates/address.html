@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block body %}
+{% load static %}
+
+	<!-- Start Banner Area -->
+	<section class="banner-area organic-breadcrumb">
+		<div class="container">
+			<div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+				<div class="col-first">
+					<h1>Address</h1>
+					<nav class="d-flex align-items-center">
+						<a href="/">Home<span class="lnr lnr-arrow-right"></span></a>
+						<a href="/address/">Address</a>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End Banner Area -->
+
+	<!--================Login Box Area =================-->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6">
+            <h3>Address</h3>
+            {% for msg in messages %}
+                <h3>{{msg}}</h3>	
+            {% endfor %}
+            <form class="row login_form" action="" method="POST" id="contactForm" novalidate="novalidate">
+                {% csrf_token %}
+                {% for x in form %}
+                <div class="col-md-12 form-group">
+                    {{x}}
+                </div>
+                {% endfor %}
+                <div class="col-md-12 form-group">
+                    <button type="submit" value="submit" class="primary-btn">Submit</button>
+                    <a href="/checkout/" class="btn btn-block btn-info" type="submit">Checkout</a>
+                </div>
+            </form>    
+        </div>
+
+        <div class="container-fluid">
+            <div class="row mt-5  ">
+                <div class="col-sm-12">
+                    <h3><strong>Your Address</strong></h3>
+                </div>
+                {% for add in all_address %}
+                    
+                <div class="col-sm-12 p-2 ">
+                    <div class="card">
+                        <div class="card-header">
+                            Address - {{forloop.counter}}
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">{{add.fname}}, {{add.lname}}, {{add.email}}, {{add.mobile}},{{add.country}},{{add.state}},{{add.city}},{{add.pincode}},{{add.add1}},{{add.add2}}</h5>
+                            <p class="card-text">With supporting text below as a natural lead-in to additional content.
+                            </p>
+                            <a href="/addressupdate/{{add.id}}/" class="btn btn-success">Edit Address</a>
+                            <a href="/addressdelete/{{add.id}}/" class="btn btn-danger">Delete Address</a>
+                        </div>
+                    </div>
+                </div>
+
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+	<!--================End Login Box Area =================-->
+
+
+{% endblock body %}
+

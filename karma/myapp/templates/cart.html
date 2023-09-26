@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+
+    <!-- Start Banner Area -->
+    <section class="banner-area organic-breadcrumb">
+        <div class="container">
+            <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+                <div class="col-first">
+                    <h1>Shopping Cart</h1>
+                    <nav class="d-flex align-items-center">
+                        <a href="{% url 'index' %} ">Home<span class="lnr lnr-arrow-right"></span></a>
+                        <a href="">Cart</a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Banner Area -->
+
+    <!--================Cart Area =================-->
+    <section class="cart_area">
+        <div class="container">
+            <div class="cart_inner">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Delete</th>
+                                <th scope="col">Product</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Total</th>
+                            </tr>
+                        </thead>
+                        {% for i in cart_item %}
+                        <tbody>
+                            <tr>
+                                <td><a class="text-dark mr-2" href="/deleteitem/{{i.id}}"> ❌</a>
+                                   </td>
+                                <td>
+                                    <div class="media">
+                                        <div class="d-flex">
+                                            <img style="height: 80px;" src="{{i.product.img.url}} " alt="">
+                                        </div>
+                                        <div class="media-body">
+                                            <p><a href="/singleproduct/{{i.product.id}}/">{{i.product.name}}</a></p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <h5>{{i.product.price}}</h5>
+                                </td>
+                                <td>
+                                    <div class="product_count">
+                                        
+                                        <a class="text-dark mr-2" href="/minusquantity/{{i.id}}"> ➖</a>
+                                        {{i.quantity}}
+                                        <a class="text-dark mr-2" href="/plusquantity/{{i.id}}"> ➕</a>
+                                    
+                                    </div>
+                                </td>
+                                <td>
+                                    <h5>{{i.product_total}}</h5>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                           
+                            <tr>
+                                <td>
+
+                                </td>
+                                <td>
+
+                                </td>
+                                <td>
+                                    <h5>Subtotal</h5>
+                                </td>
+                                <td>
+                                    <h5>{{sub_total}}</h5>
+                                </td>
+                            </tr>
+                            
+                            <tr class="out_button_area">
+                                <td>
+
+                                </td>
+                                <td>
+
+                                </td>
+                                <td>
+
+                                </td>
+                                <td>
+                                    <div class="checkout_btn_inner d-flex align-items-center">
+                                        <a class="gray_btn" href="/category/">Continue Shopping</a>
+                                        <a class="primary-btn" href="{% url 'checkout' %}">Proceed to checkout</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                        
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================End Cart Area =================-->
+
+
+{% endblock body %}
+

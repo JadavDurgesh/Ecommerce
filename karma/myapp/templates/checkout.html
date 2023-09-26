@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+
+{% block body %}
+{% load static %}
+<!-- Start Banner Area -->
+<section class="banner-area organic-breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+            <div class="col-first">
+                <h1>Checkout</h1>
+                <nav class="d-flex align-items-center">
+                    <a href="/">Home<span class="lnr lnr-arrow-right"></span></a>
+                    <a href="/checkout/">Checkout</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Banner Area -->
+
+<!--================Checkout Area =================-->
+<section class="checkout_area section_gap">
+    <div class="container">
+
+        <div class="billing_details">
+            <form action="/checkout/">
+
+                <div class="row">
+                    
+                    {% comment %} {% for ad in all_address %}
+                    
+                    <div>
+                        <strong>{{ad.fname|upper}}</strong><br>
+                        {{ad.locality}},{{ad.city}},{{ad.zipcode}},{{ad.state}}<br>
+                        {{ad.email}}<br>
+                        {{ad.mobile}}
+                    </div>
+                    <div>
+                        <input required type="radio" name="add" value="{{ad.id}}">
+                        <strong>Address: {{forloop.counter}}</strong>
+                    </div>
+                    {% endfor %} {% endcomment %}
+
+                    {% for add in all_address %}
+                    <div class="col-lg-8">
+                        <h2>Billing Details</h2>
+                        
+                        <strong>{{add.fname|upper}}</strong>
+                        <strong>{{add.lname|upper}}</strong><br>
+                        <div class=" form-group p_star">
+                            <p>{{add.email}}</p>
+                        </div>
+                        <div class="form-group p_star">
+                            <p>{{add.mobile}}</p>
+                        </div>
+                        <div class="form-group p_star">
+                            <p>{{add.country}}</p>
+                        </div>
+                        <div class="form-group p_star">
+                            <p>{{add.state}}</p>
+                        </div>
+                        <div class="form-group p_star">
+                            <p>{{add.city}}</p>
+                        </div>
+                        <div class="form-group p_star">
+                            <p>{{add.pincode}}</p>
+                        </div>
+                        <div class="form-group p_star">
+                            <p>{{add.add1}}</p>
+                        </div>
+                        <div class="form-group p_star">
+                            <p>{{add.add2}}</p>
+                        </div>
+
+                        <div>
+                            <input required type="radio" name="add1" value="{{add.id}}">
+                            <strong>Address: {{forloop.counter}}</strong>
+                        </div>
+                        
+
+                    </div>
+                    {% endfor %}
+                    <div class="col-lg-4">
+                        <div class="order_box">
+                            <h2>Your Order</h2>
+                            <ul class="list">
+                                <li><a>Product <span class="middle">Quantity</span><span class="last">Total</span></a></li>
+                                {% for x in cart_item %}
+
+                                <li><a>{{x.product.name}} <span class="middle">x {{x.quantity}}</span> <span
+                                            class="last">{{x.product_total}}</span></a></li>
+                                {% endfor %}
+                            </ul>
+                            <ul class="list list_2">
+                                <li><a>Subtotal <span>{{sub_total}}</span></a></li>
+                                <li><a>Shipping <span>Flat rate: {{shipping}}</span></a></li>
+                                <li><a>Total <span>{{grand_total}}</span></a></li>
+                            </ul>
+
+                            <button type="submit" class="primary-btn">Proceed to Online Pay</button>
+                        </div>
+                        {% comment %} <div>
+                            <button class="btn btn-sm"><a href="/order/">Cashon Delivery</a></button>
+                        </div> {% endcomment %}
+                    </div>
+
+                </div>
+                <script src="https://checkout.razorpay.com/v1/checkout.js" data-key="rzp_test_Kp7BqY55rTwOR5"
+                    data-amount="{{amount}}" data-currency="INR" data-order_id="{{payment.id}}"
+                    data-buttontext="Pay with Razorpay" data-name="FashionClub" data-description="Clothing"
+                    data-image="https://example.com/your_logo.jpg" data-prefill.name="PC"
+                    data-prefill.email="fashionclub@mail.com" data-theme.color="#F37254">
+                    </script>
+            </form>
+        </div>
+        <div class="col mt-3">
+            <a href="/address/" class="btn btn-block btn-info" type="submit">Add Address</a>
+        </div>
+    </div>
+</section>
+
+<!--================End Checkout Area =================-->
+{% endblock body %}

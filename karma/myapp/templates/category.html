@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+
+	<!-- Start Banner Area -->
+	<section class="banner-area organic-breadcrumb">
+		<div class="container">
+			<div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+				<div class="col-first">
+					<h1>Shop Category page</h1>
+					<nav class="d-flex align-items-center">
+						<a href="/">Home<span class="lnr lnr-arrow-right"></span></a>
+						<a href="/category/">Shop<span class="lnr lnr-arrow-right"></span></a>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End Banner Area -->
+	<div class="container">
+		<div class="row">
+			<div class="col-xl-3 col-lg-4 col-md-5 ">
+				<div class="sidebar-categories">
+					<ul class="main-categories">
+						<div class="card mb-3 my-2" style="width: 16rem;">
+							<div class="card-header">
+							  <a href="/category">All Categories</a>
+							</div>
+						  </div>
+						  {% for cats in all_category %}
+						  <div class="card-header">
+							<form>
+							  <ul class="list-group list-group-flush">  
+							  <input type="text" hidden name="catesid" value="{{cats.id}}" >
+							  <button type="submit" class="list-group-item list-group-item-action">{{cats.name}}</button>
+							  </ul>
+							</form>
+						  </div>
+						  {% endfor %}
+					
+				</ul>
+				</div>
+			</div>
+			<div class="col-xl-9 col-lg-8 col-md-7">
+				
+				<!-- End Filter Bar -->
+				<!-- Start Best Seller -->
+				<div class="row mx-auto">
+				{% for prod in product_by_id %}
+				<div class="card mt-3 mx-3 mb-3" style="width: 18rem;">
+					<a href="/singleproduct/{{prod.id}}/">
+					<img src="{{prod.img.url}}" class="card-img-top" alt="..."></a>
+					<div class="card-body">
+					  <h4 class="card-title">{{prod.name}}</h4>
+					  <h5 class="card-title">Price:{{prod.price}}</h5>
+					  <p class="card-text">{{prod.Description}}</p>
+					  {% if user.is_authenticated %}
+					  	<a href="/addtocart/{{prod.id}}/" class="btn btn-primary">Add to cart</a>
+					{% else %}
+						<a href="/signup/" class="btn btn-primary">Add to cart</a>
+					  {% endif %}
+					</div>
+				  </div>
+				{% endfor %}
+				</div>  
+				<!-- End Best Seller -->
+				
+			</div>
+		</div>
+	</div>
+
+	
+
+{% endblock body %}
+
